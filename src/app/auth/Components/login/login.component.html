@@ -1,0 +1,82 @@
+<div class="container-fluid vh-100 p-0">
+  <div class="row m-0 h-100">
+    <div class="col-md-6 d-flex align-items-center bg-login1">
+      <div class="row w-100">
+        <div class="col-10 col-md-8 mx-auto">
+          <h1 class="text-center mb-5">Login</h1>
+          <form [formGroup]="login">
+            <div class="mb-3">
+              <mat-form-field appearance="outline" class="width-full-field">
+                <mat-label>Identificación</mat-label>
+                <input
+                  matInput
+                  (keypress)="validateSpace($event)"
+                  formControlName="identificacion"
+                  type="text"
+                  minlength="10"
+                  maxlength="15"
+                />
+                <mat-icon matSuffix style="color: #44474e"
+                  >account_circle</mat-icon
+                >
+                @if(isValidField('identificacion')) {
+                <mat-error>
+                  <span>{{ getFieldError("identificacion") }}</span>
+                </mat-error>
+                }
+              </mat-form-field>
+            </div>
+            <div class="mb-3 text-white">
+              <mat-form-field appearance="outline" class="width-full-field">
+                <mat-label>Contraseña</mat-label>
+                <input
+                  matInput
+                  (keypress)="validateSpace($event)"
+                  formControlName="password"
+                  [type]="hide() ? 'password' : 'text'"
+                  minlength="8"
+                  maxlength="100"
+                />
+                <a
+                  class="me-1"
+                  mat-icon-button
+                  matSuffix
+                  (click)="clickEvent($event)"
+                  [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hide()"
+                >
+                  <mat-icon>{{
+                    hide() ? "visibility_off" : "visibility"
+                  }}</mat-icon>
+                </a>
+                @if(isValidField('password')) {
+                <mat-error>
+                  <span>{{ getFieldError("password") }}</span>
+                </mat-error>
+                }
+              </mat-form-field>
+            </div>
+            @if (login.valid) {
+            <button
+              mat-flat-button
+              class="width-full-field"
+              (click)="validateLogin()"
+            >
+              Ingresar
+            </button>
+            } @else {
+            <button mat-flat-button class="width-full-field" disabled>
+              Ingresar
+            </button>
+            }
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ocultar este div en pantallas pequeñas -->
+    <div
+      class="col-md-6 bg-login2 border-start border-secondary d-none d-md-block"
+    ></div>
+  </div>
+</div>

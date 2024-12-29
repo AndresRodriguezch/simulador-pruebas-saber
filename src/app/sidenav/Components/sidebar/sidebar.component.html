@@ -1,0 +1,92 @@
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+  <mat-toolbar class="example-toolbar bg-sidenav">
+    <button mat-icon-button (click)="snav.toggle()">
+      <mat-icon class="text-white">menu</mat-icon>
+    </button>
+    <h1 class="example-app-name fw-medium">Simulador Pruebas Saber</h1>
+    <span class="example-spacer"></span>
+  </mat-toolbar>
+
+  <mat-sidenav-container
+    class="example-sidenav-container"
+    [style.marginTop.px]="mobileQuery.matches ? 56 : 0"
+  >
+    <mat-sidenav
+      #snav
+      [mode]="mobileQuery.matches ? 'over' : 'side'"
+      [fixedInViewport]="mobileQuery.matches"
+      fixedTopGap="56"
+      class="sidebar"
+    >
+      <mat-nav-list>
+        <div class="row container-fluid m-0">
+          <div class="col-md-12 text-sidebar">
+            <div class="row">
+              <label class="text-center mt-3 mb-3 fw-semibold"
+                >Bienvenido</label
+              >
+            </div>
+
+            <mat-divider class="col-md-12 mx-auto mb-3"></mat-divider>
+
+            @for (dato of menu; track dato) { @if(dato.cabecera != ''){
+            <li class="nav-section">
+              <span class="sidebar-mini-icon">
+                <h5 class="text-section">
+                  <fa-icon [icon]="icon"></fa-icon> {{ dato.cabecera }}
+                </h5>
+              </span>
+            </li>
+            }
+
+            <a
+              mat-list-item
+              class="mb-2 btn-hover text-sidebar"
+              data-bs-toggle="collapse"
+              href="#collapseExample{{ dato.id_menu }}"
+              aria-expanded="false"
+              aria-controls="collapseExample"
+            >
+              <fa-icon [icon]="dato.icon" class="me-3 text-sidebar"></fa-icon>
+              <span class="text-sidebar">{{ dato.descripcion }}</span>
+            </a>
+            <div class="collapse mb-1" id="collapseExample{{ dato.id_menu }}">
+              <ul>
+                @for (sub of dato.submenus; track $index) {
+                <li class="mt-1 mb-1">
+                  <a
+                    mat-list-item
+                    [routerLink]="
+                      sub.descripcion === 'Cerrar Sesión'
+                        ? null
+                        : sub.ruta_componente
+                    "
+                    class="btn-sub-hover text-sidebar"
+                    (click)="sub.accion ? sub.accion() : null"
+                  >
+                    <span class="text-sidebar">{{ sub.descripcion }}</span>
+                  </a>
+                </li>
+                }
+              </ul>
+
+              <mat-divider class="col-md-12 mx-auto mb-3"></mat-divider>
+            </div>
+            }
+          </div>
+        </div>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="content">
+      <!-- @for (content of fillerContent; track content) {
+            <p>{{content}}</p>
+            } -->
+      <div class="row">
+        <div class="col-md-12 p-5">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

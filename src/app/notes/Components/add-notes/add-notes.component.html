@@ -1,0 +1,59 @@
+<div class="row">
+  <div class="col-md-6 mx-auto">
+    <div class="card sombra text-center mx-auto">
+      <div class="card-body">
+        <h5 class="card-title">
+          Estudiante: {{ estudianteData.estudiante }} -
+          {{ estudianteData.identificacion }}
+        </h5>
+        <p class="card-text"></p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 mx-auto">
+    <div class="card sombra mt-4 mx-auto">
+      <div class="card-body">
+        <h5 class="card-title">Agregar Notas</h5>
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field class="width-full-field">
+              <mat-label>Asignatura</mat-label>
+              <mat-select [(ngModel)]="selectedAsignature" name="asignature">
+                @for (asignature of asignatures; track asignature) {
+                <mat-option [value]="asignature.value">{{
+                  asignature.name
+                }}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-slider
+              style="width: 90%"
+              [showTickMarks]="showTicks"
+              [max]="max"
+              [min]="min"
+              [discrete]="thumbLabel"
+              [step]="step"
+            >
+              <input [(ngModel)]="valueNote" matSliderThumb />
+            </mat-slider>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-md-12 mx-auto text-center">
+            <button
+              (click)="addNote()"
+              [disabled]="!validateForm()"
+              class="btn btn-outline-success col-md-3"
+            >
+              Registrar Nota
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

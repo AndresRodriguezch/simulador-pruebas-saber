@@ -1,0 +1,77 @@
+$white: #ffffff;
+$black: #000000;
+$bg-content: #f4f4f4;
+
+.example-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    overflow-x: hidden;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.bg-sidenav {
+    background-color: #005CBB;
+    color: $white;
+}
+
+.example-is-mobile .example-toolbar {
+    position: fixed;
+    z-index: 2;
+}
+
+h1.example-app-name {
+    margin-left: 8px;
+}
+
+.example-sidenav-container {
+    flex: 1;
+    background-color: $white;
+}
+
+mat-sidenav-content {
+    overflow-x: hidden !important;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+.example-is-mobile .example-sidenav-container {
+    flex: 1 0 auto;
+}
+
+.sidebar {
+    background-color: $white;
+    width: 270px;
+    overflow-x: hidden !important;
+    overflow-y: auto;
+    scrollbar-color: #888 transparent;
+    scrollbar-width: thin;
+}
+
+.content{
+    background-color: $bg-content;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 10px;
+    border: 2px solid #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}

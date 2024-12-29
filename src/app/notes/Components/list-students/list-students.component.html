@@ -1,0 +1,75 @@
+<div class="card sombra" style="width: 100%">
+  <div class="card-body">
+    <h5 class="card-title">Lista De Estudiantes</h5>
+    <p class="card-text">
+      A continuación observará el listado de los estudiantes registrados en el
+      sistema
+    </p>
+  </div>
+</div>
+
+<div>
+  <div class="mat-elevation-z8 mt-5">
+    <table mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="estudiante">
+        <th class="text-center" mat-header-cell *matHeaderCellDef>
+          Estudiante
+        </th>
+        <td class="text-center" mat-cell *matCellDef="let element">
+          {{ element.estudiante }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="identificacion">
+        <th class="text-center" mat-header-cell *matHeaderCellDef>
+          Identificación
+        </th>
+        <td class="text-center" mat-cell *matCellDef="let element">
+          {{ element.identificacion }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="notas">
+        <th class="text-center" mat-header-cell *matHeaderCellDef>
+          Registra Notas
+        </th>
+        <td class="text-center" mat-cell *matCellDef="let element">
+          @if (element.notas) {
+          <mat-chip class="bg-success">Registrada</mat-chip>
+          }@else {
+          <mat-chip class="bg-danger">Sin registrar</mat-chip>
+          }
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="registrar">
+        <th class="text-center" mat-header-cell *matHeaderCellDef>Registrar</th>
+        <td class="text-center" mat-cell *matCellDef="let element">
+          @if (element.registrar) {
+          <fa-icon
+            [routerLink]="'addnotes'"
+            [queryParams]="{
+              estudiante: element.estudiante,
+              identificacion: element.identificacion
+            }"
+            style="cursor: pointer"
+            [icon]="faBook"
+          ></fa-icon>
+          }@else {
+          <fa-icon style="cursor: pointer" [icon]="faBan"></fa-icon>
+          }
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 20]"
+      showFirstLastButtons
+      aria-label="Select page of periodic elements"
+    >
+    </mat-paginator>
+  </div>
+</div>
